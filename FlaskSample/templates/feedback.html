@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<script>
+    function textAnalyze(){
+        text = $("#feedbackText")[0].value
+        if(text == ''){
+            alert('내용을 입력해주세요');
+        }
+        else {
+            $("#feedbackTable").append('<tr><td></td></tr><tr><td></td></tr>')
+        }
+    }
+</script>
+
+<br/>
+
+<form>
+  <div class="form-group">
+    <label for="feedbackText">Feedback Text</label>
+    <input type="input" class="form-control" id="feedbackText" placeholder="Feedback Text">
+  </div>  
+  <button type="submit" class="btn btn-default" id="submitBtn" onclick="textAnalyze()">Submit</button>
+</form>
+
+<br/>
+
+<table class="table table-bordered" id="feedbackTable">        
+</table>
+
+<br/>
+{% for d in data %}
+<table class="table table-bordered">        
+    <tr>
+        <td>
+            {{ d[0] }}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            {% for dd in d[1] %}                
+                <pre>{{ dd }} </pre>         
+            {% endfor %}
+        </td>
+    </tr>
+</table>
+{% endfor %}    
+
+{% endblock %}

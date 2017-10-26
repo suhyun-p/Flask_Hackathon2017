@@ -1,0 +1,86 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<script src="static/scripts/jquery-1.10.2.js"></script>
+<script>
+
+var show = true;
+var answerShow = false;
+
+var qList = []
+qList.push(['배송 도 빠르 고', '빠름', '느림'])
+qList.push(['빠르ㄴ 배송 에', '빠름', '느림'])
+qList.push(['배송 도 총알 이 고', '빠름', '느림'])
+qList.push(['배송 맘 에 드 ㅁ니다', '빠름', '느림'])
+qList.push(['배송 조 빠르 구요', '빠름', '느림'])
+qList.push(['배송 많이 느리 ㅂ니다', '빠름', '느림'])
+qList.push(['배송 빠르 았 어요', '빠름', '느림'])
+qList.push(['배송 정말 하루 만 에 오 네요', '빠름', '느림'])
+
+var index = 0
+var length = qList.length
+
+setInterval(toggle, 2000);
+
+function toggle() {
+   if(show) {
+        $("#question").html("");
+        $("#answer1").html("");
+        $("#answer2").html("");
+        show = false;       
+        index += 1
+        if(index > qList.length-1){
+            index = 0
+        }
+   }
+   else {
+        $("#question").html(qList[index][0]);
+        $("#answer1").html(qList[index][1]);
+        $("#answer2").html(qList[index][2]);
+        show = true;       
+   }
+}
+
+function writeAnswer(index, answer){
+    if(answer == 1){
+        $("#scoreBoard").append('<p>' + qList[index][0] + ' : ' + '빠름' + '</p')    
+    }
+    else {
+        $("#scoreBoard").append('<p>' + qList[index][0] + ' : ' + '느림' + '</p')       
+    }
+    
+}
+
+</script>
+
+<br/>
+
+<div class="jumbotron" style="background-color: #ffeb00; height:600px">
+    <div class="row" style="height:400px">
+    <br/>
+    <br/>
+    <br/>
+    <h1 align="center" id="question"></h1>
+    <br/>
+    <br/>
+    <br/>
+    <br/>    
+    </div>    
+    <div class="row" style="height:200px">    
+        <div class="col-md-6"  align="center">
+            <h2 align="center" id="answer1" onclick="writeAnswer(index, 1)"></h2>   
+        </div>
+        <div class="col-md-6"  align="center">
+            <h2 align="center" id="answer2" onclick="writeAnswer(index, 2)"></h2>   
+        </div>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+</div>
+
+<div id="scoreBoard">
+</div>
+
+{% endblock %}
